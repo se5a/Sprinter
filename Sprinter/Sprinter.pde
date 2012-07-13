@@ -127,7 +127,14 @@
 - Extra Parameter for Max Extruder Jerk
 - New Parameter (max_e_jerk) in EEPROM --> Default settings after update !
 
+ Version 1.3.19.1 - se5a
 
+- attempt at adding alarms.
+  files added: pitches.h melodys.h beepers.h
+  files changed: 
+    configuration.h lines: 66
+    pins.h lines: 481
+    sprinter.pde lines: 165-167, 201-202, 1913-1917
 
 */
 
@@ -153,6 +160,9 @@
   #include "store_eeprom.h"
 #endif
 
+#ifdef ALARMSUPORT
+  #include "beppers.h"
+#endif
 #ifndef CRITICAL_SECTION_START
 #define CRITICAL_SECTION_START  unsigned char _sreg = SREG; cli()
 #define CRITICAL_SECTION_END    SREG = _sreg
@@ -184,6 +194,8 @@ void __cxa_pure_virtual(){};
 // M114 - Display current position
 
 //Custom M Codes
+// M300 - play beep, not yet done
+// M301 - play melody as defined in melodys.h (M301 alarm1_tones, alarm1_beats) or somethign. not yet done.
 // M20  - List SD card
 // M21  - Init SD card
 // M22  - Release SD card
@@ -1893,7 +1905,12 @@ FORCE_INLINE void process_commands()
               Serial.println(cmdbuffer[bufindr]);
             #endif
       break;
-
+      
+#ifdef ALARMSUPORT
+      case 301: //M301 play melody
+      play_tune(alarm1_tones, alarm1_beats);
+      break;
+#endif
     }
     
   }

@@ -478,7 +478,7 @@
 #define FAN_PIN            9
 #define PS_ON_PIN          12
 #define KILL_PIN           -1
-#define ALARM_PIN          -1
+#define ALARM_PIN          44
 
 #define HEATER_0_PIN       10
 #define HEATER_1_PIN       8

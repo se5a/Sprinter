@@ -62,6 +62,8 @@ const bool Z_ENDSTOP_INVERT = false;
 //Only work with Atmega1284 you need +1 kb ram
 //#define SD_FAST_XFER_AKTIV
 
+//uncomment for alarm on RAMPS
+#define ALARMSUPORT
 //-----------------------------------------------------------------------
 //// STORE SETTINGS TO EEPROM
 //-----------------------------------------------------------------------
